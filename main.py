@@ -17,19 +17,32 @@ class Figure:
     y = 0
 
     figures = [
-        [[1, 5, 9, 13], [4, 5, 6, 7]],
-        [[4, 5, 9, 10], [2, 6, 5, 9]],
-        [[6, 7, 9, 10], [1, 5, 6, 10]],
-        [[1, 2, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],
-        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],
-        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
-        [[1, 2, 5, 6]],
+        [[1, 5, 9, 13], [4, 5, 6, 7]],  # vertical blocks
+        [[4, 5, 9, 10], [2, 6, 5, 9]],  # left z blocks
+        [[6, 7, 9, 10], [1, 5, 6, 10]],  # right z blocks
+        [[1, 2, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],  # p blocks
+        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],  # q blocks
+        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],  # T blocks
+        [[1, 2, 5, 6]],  # square block
     ]
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, emotion):
+        ###
+        # emotion:
+        # neutral - 0
+        # happy - 1
+        # angry - 2
+        # others - 3
+        ###
+
         self.x = x
         self.y = y
-        self.type = random.randint(0, len(self.figures) - 1)
+        if emotion == 0 or emotion == 3:
+            self.type = random.randint(0, len(self.figures) - 1)
+        elif emotion == 1:
+            self.type = 0
+        else:
+            self.type = 1 + random.randint(0, 1)
         self.color = random.randint(1, len(colors) - 1)
         self.rotation = 0
 
@@ -64,8 +77,10 @@ class Tetris:
                 new_line.append(0)
             self.field.append(new_line)
 
+        self.emotion = 0  # init by neutral
+
     def new_figure(self):
-        self.figure = Figure(3, 0)
+        self.figure = Figure(3, 0, self.emotion)
 
     def intersects(self):
         intersection = False
@@ -142,9 +157,10 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Tetris")
 
 # Loop until the user clicks the close button.
+MAX_LEVEL = 30
 done = False
 clock = pygame.time.Clock()
-fps = 25
+fps = 60
 game = Tetris(20, 10)
 counter = 0
 
@@ -157,6 +173,9 @@ while not done:
     if counter > 100000:
         counter = 0
 
+    if game.emotion == 0:
+        if game.level <= MAX_LEVEL:
+            game.level += 1
     if counter % (fps // game.level // 2) == 0 or pressing_down:
         if game.state == "start":
             game.go_down()
