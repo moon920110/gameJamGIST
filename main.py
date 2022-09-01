@@ -60,9 +60,9 @@ class Tetris:
     field = []
     height = 0
     width = 0
-    x = 100
-    y = 60
-    zoom = 20
+    x = 30
+    y = 50
+    zoom = 25
     figure = None
 
     def __init__(self, height, width):
@@ -81,6 +81,7 @@ class Tetris:
 
     def new_figure(self):
         self.figure = Figure(3, 0, self.emotion)
+        self.next_figure = Figure(3, 0, self.emotion)
 
     def intersects(self):
         intersection = False
@@ -151,7 +152,10 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (128, 128, 128)
 
-size = (400, 500)
+size = (500, 600)
+next_block_draw = (size[0]*0.8, size[1]*0.4)
+next_block_size = size[0]*0.1
+
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("Tetris")
@@ -222,6 +226,8 @@ while not done:
                                      [game.x + game.zoom * (j + game.figure.x) + 1,
                                       game.y + game.zoom * (i + game.figure.y) + 1,
                                       game.zoom - 2, game.zoom - 2])
+
+    pygame.draw.rect(screen, colors[game.field[i][j]], [game.x + game.zoom * j + 1, game.y + game.zoom * i + 1, game.zoom - 2, game.zoom - 1])
 
     font = pygame.font.SysFont('Calibri', 25, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
