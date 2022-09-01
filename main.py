@@ -243,11 +243,16 @@ while not done:
 
     font = pygame.font.SysFont('Calibri', 25, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
+    font2 = pygame.font.SysFont('Calibri', 25, True, False)
     text = font.render("Score: " + str(game.score), True, BLACK)
+    speed = font2.render("Speed: " + str(game.level), True, BLACK)
+    next = font2.render("Next block", True, BLACK)
     text_game_over = font1.render("Game Over", True, (255, 125, 0))
     text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
 
-    screen.blit(text, [0, 0])
+    screen.blit(text, [106, 11])
+    screen.blit(next, [330, 180])
+    screen.blit(speed, [330, 410])
     if game.state == "gameover":
         screen.blit(text_game_over, [20, 200])
         screen.blit(text_game_over1, [25, 265])
