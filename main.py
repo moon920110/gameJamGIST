@@ -1,5 +1,6 @@
 import pygame
 import random
+import copy
 
 colors = [
     (0, 0, 0),
@@ -80,8 +81,12 @@ class Tetris:
         self.emotion = 0  # init by neutral
 
     def new_figure(self):
-        self.figure = Figure(3, 0, self.emotion)
-        self.next_figure = Figure(3, 0, self.emotion)
+        if self.figure == None:
+            self.figure = Figure(3, 0, self.emotion)
+            self.next_figure = Figure(3, 0, self.emotion)
+        else:
+            self.figure = copy.deepcopy(self.next_figure)
+            self.next_figure = Figure(3, 0, self.emotion)
 
     def intersects(self):
         intersection = False
@@ -228,7 +233,6 @@ while not done:
                                       game.zoom - 2, game.zoom - 2])
 
     pygame.draw.rect(screen, GRAY, [next_block_draw[0], next_block_draw[1], next_block_size, next_block_size])
-
     
     if game.next_figure is not None:
         for i in range(4):
