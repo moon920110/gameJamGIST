@@ -28,6 +28,8 @@ class Figure:
 
         self.x = x
         self.y = y
+        if emotion is None:
+            emotion = 4
         if rule[emotion] == 0:  # vert
             self.type = 0
         elif rule[emotion] == 1:  # L
