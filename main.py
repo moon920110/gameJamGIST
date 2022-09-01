@@ -153,7 +153,7 @@ WHITE = (255, 255, 255)
 GRAY = (128, 128, 128)
 
 size = (500, 600)
-next_block_draw = int(Tetris.zoom * 13.5), Tetris.zoom * 9
+next_block_draw = int(Tetris.zoom * 13.1), Tetris.zoom * 9
 next_block_size = Tetris.zoom * 5
 
 screen = pygame.display.set_mode(size)
