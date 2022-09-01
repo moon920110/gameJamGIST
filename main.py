@@ -153,8 +153,8 @@ WHITE = (255, 255, 255)
 GRAY = (128, 128, 128)
 
 size = (500, 600)
-next_block_draw = (size[0]*0.8, size[1]*0.4)
-next_block_size = size[0]*0.1
+next_block_draw = int(Tetris.zoom * 13.5), Tetris.zoom * 9
+next_block_size = Tetris.zoom * 5
 
 screen = pygame.display.set_mode(size)
 
@@ -227,7 +227,19 @@ while not done:
                                       game.y + game.zoom * (i + game.figure.y) + 1,
                                       game.zoom - 2, game.zoom - 2])
 
-    pygame.draw.rect(screen, colors[game.field[i][j]], [game.x + game.zoom * j + 1, game.y + game.zoom * i + 1, game.zoom - 2, game.zoom - 1])
+    pygame.draw.rect(screen, GRAY, [next_block_draw[0], next_block_draw[1], next_block_size, next_block_size])
+
+    
+    if game.next_figure is not None:
+        for i in range(4):
+            for j in range(4):
+                p = i * 4 + j
+                if p in game.next_figure.image():
+                    pygame.draw.rect(screen, colors[game.next_figure.color],
+                                     [next_block_draw[0] + game.zoom * (j + game.next_figure.x-2),
+                                      next_block_draw[1] + game.zoom * (i + game.next_figure.y+1),
+                                      game.zoom - 2, game.zoom - 2])
+
 
     font = pygame.font.SysFont('Calibri', 25, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
