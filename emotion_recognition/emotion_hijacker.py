@@ -19,7 +19,7 @@ class emotionHijacker:
         self.emotion_classifier = load_model(emotion_model_path, compile=False)
         self.EMOTIONS = ["angry", "disgust", "scared", "happy", "sad", "surprised", "neutral"]
 
-        self.emo = None
+        self.emo = 4
         self.done = False
         self.canvas = None
         self.frame_clone = None
