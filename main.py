@@ -1,4 +1,5 @@
 import pygame
+import cv2
 
 from emotion_recognition.emotion_hijacker import emotionHijacker
 from core.tetris import Tetris
@@ -15,9 +16,10 @@ def game_main():
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
     GRAY = (128, 128, 128)
+    RED = (255, 0, 0)
 
-    size = (500, 600)
-    next_block_draw = int(Tetris.zoom * 13.1), Tetris.zoom * 9
+    size = (700, 700)
+    next_block_draw = int(Tetris.zoom * 17), Tetris.zoom * 4
     next_block_size = Tetris.zoom * 5
 
     screen = pygame.display.set_mode(size)
@@ -100,21 +102,29 @@ def game_main():
                                           game.zoom - 2, game.zoom - 2])
 
 
-        font = pygame.font.SysFont('Calibri', 25, True, False)
         font1 = pygame.font.SysFont('Calibri', 65, True, False)
         font2 = pygame.font.SysFont('Calibri', 25, True, False)
-        text = font.render("Score: " + str(game.score), True, BLACK)
-        speed = font2.render("Speed: " + str(game.level), True, BLACK)
+        speed = font2.render("Speed: ", True, BLACK)
+        speed_num = font2.render(str(game.level), True, RED)
         next = font2.render("Next block", True, BLACK)
+        emo = font2.render("Emotion: ", True, BLACK)
+        emo_val = font2.render(str(game.emotion_labels[game.emotion]), True, RED)
         text_game_over = font1.render("Game Over", True, (255, 125, 0))
         text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
 
-        screen.blit(text, [106, 11])
-        screen.blit(next, [330, 180])
-        screen.blit(speed, [330, 410])
+        screen.blit(next, [420, 50])
+        screen.blit(speed, [106, 11])
+        screen.blit(speed_num, [206, 11])
+        screen.blit(emo, [370, 500])
+        screen.blit(emo_val, [490, 500])
         if game.state == "gameover":
             screen.blit(text_game_over, [20, 200])
             screen.blit(text_game_over1, [25, 265])
+
+        canvas, f_c = emotion_hijacker.get_frame()
+        f_c = cv2.rotate(f_c, cv2.ROTATE_90_COUNTERCLOCKWISE)
+        surf = pygame.surfarray.make_surface(f_c)
+        screen.blit(surf, (340, 300))
 
         pygame.display.flip()
         clock.tick(fps)

@@ -1,6 +1,7 @@
 from keras.preprocessing.image import img_to_array
 import imutils
 import cv2
+import time
 from keras.models import load_model
 import numpy as np
 import threading
@@ -28,6 +29,7 @@ class emotionHijacker:
         self.camera = cv2.VideoCapture(0)
         self.t = threading.Thread(target=self._hijack)
         self.t.start()
+        time.sleep(1)
 
     def hijack(self):
         return self.emo
@@ -78,8 +80,8 @@ class emotionHijacker:
                 cv2.putText(self.canvas, text, (10, (i * 35) + 23),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.45,
                             (255, 255, 255), 2)
-                cv2.putText(self.frame_clone, label, (fX, fY - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+                # cv2.putText(self.frame_clone, label, (fX, fY - 10),
+                #             cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
                 cv2.rectangle(self.frame_clone, (fX, fY), (fX + fW, fY + fH),
                               (0, 0, 255), 2)
             #    for c in range(0, 3):
@@ -88,7 +90,7 @@ class emotionHijacker:
             #        10:130, c] * (1.0 - emoji_face[:, :, 3] / 255.0)
 
             # cv2.imshow('your_face', frameClone)
-            cv2.imshow("Probabilities", self.canvas)
+            # cv2.imshow("Probabilities", self.canvas)
 
             # ["angry", "disgust", "scared", "happy", "sad", "surprised", "neutral"]
             emo = preds.argmax()

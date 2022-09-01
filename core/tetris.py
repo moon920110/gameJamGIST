@@ -28,7 +28,7 @@ class Tetris:
             self.field.append(new_line)
 
         self.emotion = 0  # init by neutral
-        self.emotion_labels = ['neutral', 'happy', 'angry', 'surprising', 'others']
+        self.emotion_labels = ['NEUTRAL', 'HAPPY', 'ANGRY', 'SURPRISING', 'OTHERS']
         self.block_labels = ['STRAIGHT', 'L', 'T', 'SKEW', 'SQUARE']
         self.rule = [i for i in range(5)]  # 0-vertical, 1-L, 2-T, 3-z, 4-square
         random.shuffle(self.rule)
