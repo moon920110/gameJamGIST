@@ -60,9 +60,9 @@ class Tetris:
     field = []
     height = 0
     width = 0
-    x = 100
-    y = 60
-    zoom = 20
+    x = 30
+    y = 50
+    zoom = 25
     figure = None
 
     def __init__(self, height, width):
@@ -81,6 +81,7 @@ class Tetris:
 
     def new_figure(self):
         self.figure = Figure(3, 0, self.emotion)
+        self.next_figure = Figure(3, 0, self.emotion)
 
     def intersects(self):
         intersection = False
@@ -151,7 +152,10 @@ BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (128, 128, 128)
 
-size = (400, 500)
+size = (500, 600)
+next_block_draw = int(Tetris.zoom * 13.1), Tetris.zoom * 9
+next_block_size = Tetris.zoom * 5
+
 screen = pygame.display.set_mode(size)
 
 pygame.display.set_caption("Tetris")
@@ -223,13 +227,32 @@ while not done:
                                       game.y + game.zoom * (i + game.figure.y) + 1,
                                       game.zoom - 2, game.zoom - 2])
 
+    pygame.draw.rect(screen, GRAY, [next_block_draw[0], next_block_draw[1], next_block_size, next_block_size])
+
+    
+    if game.next_figure is not None:
+        for i in range(4):
+            for j in range(4):
+                p = i * 4 + j
+                if p in game.next_figure.image():
+                    pygame.draw.rect(screen, colors[game.next_figure.color],
+                                     [next_block_draw[0] + game.zoom * (j + game.next_figure.x-2),
+                                      next_block_draw[1] + game.zoom * (i + game.next_figure.y+1),
+                                      game.zoom - 2, game.zoom - 2])
+
+
     font = pygame.font.SysFont('Calibri', 25, True, False)
     font1 = pygame.font.SysFont('Calibri', 65, True, False)
+    font2 = pygame.font.SysFont('Calibri', 25, True, False)
     text = font.render("Score: " + str(game.score), True, BLACK)
+    speed = font2.render("Speed: " + str(game.level), True, BLACK)
+    next = font2.render("Next block", True, BLACK)
     text_game_over = font1.render("Game Over", True, (255, 125, 0))
     text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
 
-    screen.blit(text, [0, 0])
+    screen.blit(text, [106, 11])
+    screen.blit(next, [330, 180])
+    screen.blit(speed, [330, 410])
     if game.state == "gameover":
         screen.blit(text_game_over, [20, 200])
         screen.blit(text_game_over1, [25, 265])
