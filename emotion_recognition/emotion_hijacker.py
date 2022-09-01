@@ -5,11 +5,11 @@ from keras.models import load_model
 import numpy as np
 
 
-class EMOTION_HIJACKER:
+class emotionHijacker:
     def __init__(self):
         # parameters for loading data and images
-        detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
-        emotion_model_path = 'models/_mini_XCEPTION.102-0.66.hdf5'
+        detection_model_path = 'emotion_recognition/haarcascade_files/haarcascade_frontalface_default.xml'
+        emotion_model_path = 'emotion_recognition/models/_mini_XCEPTION.102-0.66.hdf5'
 
         # hyper-parameters for bounding boxes shape
         # loading models
@@ -20,6 +20,9 @@ class EMOTION_HIJACKER:
     def ready(self):
         cv2.namedWindow('your_face')
         self.camera = cv2.VideoCapture(0)
+
+    def _hijack(self):
+        pass
 
     def hijack(self):
         # starting video streaming
@@ -76,6 +79,22 @@ class EMOTION_HIJACKER:
         cv2.imshow("Probabilities", canvas)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             self.terminate()
+
+        # ["angry", "disgust", "scared", "happy", "sad", "surprised", "neutral"]
+        emo = preds.argmax()
+
+        if emo == 0:
+            emo = 2
+        elif emo == 3:
+            emo = 1
+        elif emo == 5:
+            emo = 3
+        elif emo == 6:
+            emo = 0
+        else:
+            emo = 4
+
+        return emo
 
     def terminate(self):
         self.camera.release()

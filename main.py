@@ -1,6 +1,8 @@
 import pygame
 import random
 
+from emotion_recognition.emotion_hijacker import emotionHijacker
+
 colors = [
     (0, 0, 0),
     (120, 37, 179),
@@ -32,7 +34,8 @@ class Figure:
         # neutral - 0
         # happy - 1
         # angry - 2
-        # others - 3
+        # surprising - 3
+        # others - 4
         ###
 
         self.x = x
@@ -146,6 +149,8 @@ class Tetris:
 
 # Initialize the game engine
 pygame.init()
+emotion_hijacker = emotionHijacker()
+emotion_hijacker.ready()
 
 # Define some colors
 BLACK = (0, 0, 0)
@@ -179,6 +184,7 @@ while not done:
         counter = 0
 
     if counter % (fps // game.level // 2) == 0 or pressing_down:
+        game.emotion = emotion_hijacker.hijack()
         if game.emotion == 0:
             if game.level < MAX_LEVEL/2:
                 game.level += 1
