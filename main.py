@@ -200,6 +200,7 @@ while not done:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            emotion_hijacker.terminate()
             done = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
