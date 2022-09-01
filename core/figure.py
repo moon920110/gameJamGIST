@@ -16,24 +16,29 @@ class Figure:
         [[1, 2, 5, 6]],  # square block
     ]
 
-    def __init__(self, x, y, emotion):
+    def __init__(self, x, y, emotion, rule):
         ###
         # emotion:
-        # neutral - 0
-        # happy - 1
-        # angry - 2
-        # surprising - 3
-        # others - 4
+        # neutral 0 - speed 10
+        # happy 1 - speed 2
+        # angry 2 - speed 6
+        # surprising 3 - speed 4
+        # others 4 - speed 8
         ###
 
         self.x = x
         self.y = y
-        if emotion == 0 or emotion == 3:
-            self.type = random.randint(0, len(self.figures) - 1)
-        elif emotion == 1:
+        if rule[emotion] == 0:  # vert
             self.type = 0
-        else:
-            self.type = 1 + random.randint(0, 1)
+        elif rule[emotion] == 1:  # L
+            self.type = random.randint(3, 4)
+        elif rule[emotion] == 2:  # T
+            self.type = 5
+        elif rule[emotion] == 3:  # z
+            self.type = random.randint(1, 2)
+        else:  # sqr
+            self.type = 6
+
         self.color = random.randint(1, len(colors) - 1)
         self.rotation = 0
 

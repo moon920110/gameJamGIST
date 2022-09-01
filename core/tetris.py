@@ -1,4 +1,5 @@
 import copy
+import random
 from core.figure import Figure
 
 
@@ -27,14 +28,20 @@ class Tetris:
             self.field.append(new_line)
 
         self.emotion = 0  # init by neutral
+        self.emotion_labels = ['neutral', 'happy', 'angry', 'surprising', 'others']
+        self.block_labels = ['Line', 'L', 'T', 'Z', 'SQUARE']
+        self.rule = [i for i in range(5)]  # 0-vertical, 1-L, 2-T, 3-z, 4-square
+        random.shuffle(self.rule)
+        for i in range(5):
+            print(f'{self.emotion_labels[i]}:{self.block_labels[i]} | ', end='')
 
     def new_figure(self):
         if self.figure == None:
-            self.figure = Figure(3, 0, self.emotion)
-            self.next_figure = Figure(3, 0, self.emotion)
+            self.figure = Figure(3, 0, self.emotion, self.rule)
+            self.next_figure = Figure(3, 0, self.emotion, self.rule)
         else:
             self.figure = copy.deepcopy(self.next_figure)
-            self.next_figure = Figure(3, 0, self.emotion)
+            self.next_figure = Figure(3, 0, self.emotion, self.rule)
 
     def intersects(self):
         intersection = False
@@ -95,4 +102,17 @@ class Tetris:
         self.figure.rotate()
         if self.intersects():
             self.figure.rotation = old_rotation
+
+    def set_emotion(self, emotion):
+        self.emotion = emotion
+        if self.emotion == 0:
+            self.level = 10
+        elif self.emotion == 1:
+            self.level = 2
+        elif self.emotion == 2:
+            self.level = 6
+        elif self.emotion == 3:
+            self.level = 4
+        else:
+            self.level = 8
 

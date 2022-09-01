@@ -25,8 +25,6 @@ def game_main():
     pygame.display.set_caption("Tetris")
 
     # Loop until the user clicks the close button.
-    MAX_LEVEL = 12
-    INIT_LEVEL = 2
     done = False
     clock = pygame.time.Clock()
     fps = 25
@@ -43,12 +41,8 @@ def game_main():
             counter = 0
 
         if counter % (fps // game.level // 2) == 0 or pressing_down:
-            game.emotion = emotion_hijacker.hijack()
-            if game.emotion == 0:
-                if game.level < MAX_LEVEL:
-                    game.level += 1
-            else:
-                game.level = INIT_LEVEL
+            game.set_emotion(emotion_hijacker.hijack())
+
             if game.state == "start":
                 game.go_down()
 
