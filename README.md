@@ -13,11 +13,11 @@ Every single play, your facial emotion will be *randomly* matched with **block t
 | Others    | 4     |
 | Neutral   | 5     |
 
-# Quick start
+## Quick start
 - Windows `pip install -r requirements.txt`
 - Mac OS `pip install -r requirements_formac.txt`
 
-# How to play
+## How to play
 1. Run `main.py`
 2. Read matched **Emotion : Block type** below your screen.
    1. Emotion and block type will be randomly matched
@@ -25,6 +25,6 @@ Every single play, your facial emotion will be *randomly* matched with **block t
 3. Be emotive to manage next block type and speed.
 4. Cheer up!
 
-## Tips for Newbies
+### Tips for Newbies
 - Be **emotive**! Because *neutral* state will drop your blocks really quick.
 - **Smile** while you planning strategy! Because *happy* status will drop your blocks slowly.
