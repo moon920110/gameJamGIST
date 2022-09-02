@@ -104,19 +104,39 @@ def game_main():
 
         font1 = pygame.font.SysFont('Calibri', 65, True, False)
         font2 = pygame.font.SysFont('Calibri', 25, True, False)
+        font3 = pygame.font.SysFont('Calibri', 18, True, False)
         speed = font2.render("Speed: ", True, BLACK)
         speed_num = font2.render(str(game.level), True, RED)
         next = font2.render("Next block", True, BLACK)
         emo = font2.render("Emotion: ", True, BLACK)
-        emo_val = font2.render(str(game.emotion_labels[game.emotion]), True, RED)
+        game_emo = game.emotion
+        emo_val = font2.render(str(game.emotion_labels[game_emo]), True, RED)
         text_game_over = font1.render("Game Over", True, (255, 125, 0))
         text_game_over1 = font1.render("Press ESC", True, (255, 215, 0))
+        title = font2.render("Emotion (Speed) : Block type", True, GRAY)
+
+        block_rules = []
+        for i in range(5):
+            block_rules.append(game.emotion_labels[i] + ' (' + str(game.speeds[i]) + ')'+ '  :  ' + game.block_labels[i])
+
+        block_rules_0 = font3.render(block_rules[0], True, False)
+        block_rules_1 = font3.render(block_rules[1], True, False)
+        block_rules_2 = font3.render(block_rules[2], True, False)
+        block_rules_3 = font3.render(block_rules[3], True, False)
+        block_rules_4 = font3.render(block_rules[4], True, False)
 
         screen.blit(next, [420, 50])
         screen.blit(speed, [106, 11])
         screen.blit(speed_num, [206, 11])
         screen.blit(emo, [370, 500])
         screen.blit(emo_val, [490, 500])
+        screen.blit(title, [180, 580])
+        screen.blit(block_rules_0, [160, 610])
+        screen.blit(block_rules_1, [160, 630])
+        screen.blit(block_rules_2, [160, 650])
+        screen.blit(block_rules_3, [360, 610])
+        screen.blit(block_rules_4, [360, 630])
+
         if game.state == "gameover":
             screen.blit(text_game_over, [20, 200])
             screen.blit(text_game_over1, [25, 265])

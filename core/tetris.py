@@ -29,11 +29,10 @@ class Tetris:
 
         self.emotion = 0  # init by neutral
         self.emotion_labels = ['NEUTRAL', 'HAPPY', 'ANGRY', 'SURPRISING', 'OTHERS']
-        self.block_labels = ['STRAIGHT', 'L', 'T', 'SKEW', 'SQUARE']
+        self.block_labels = ['l', 'L', 'T', 'Z', 'O']
         self.rule = [i for i in range(5)]  # 0-vertical, 1-L, 2-T, 3-z, 4-square
+        self.speeds = [10, 2, 6, 4, 8]
         random.shuffle(self.rule)
-        for i in range(5):
-            print(f'{self.emotion_labels[i]}:{self.block_labels[i]} | ', end='')
 
     def new_figure(self):
         if self.figure == None:

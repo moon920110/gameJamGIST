@@ -42,7 +42,7 @@ class emotionHijacker:
             # starting video streaming
             frame = self.camera.read()[1]
             # reading the frame
-            frame = imutils.resize(frame, width=300)
+            frame = imutils.resize(frame, height=168)
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self.face_detection.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30),
                                                     flags=cv2.CASCADE_SCALE_IMAGE)
