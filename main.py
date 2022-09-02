@@ -4,7 +4,7 @@ import cv2
 from emotion_recognition.emotion_hijacker import emotionHijacker
 from core.tetris import Tetris
 from common.const import *
-
+import os
 
 def game_main():
     # Initialize the game engine
@@ -135,10 +135,15 @@ def game_main():
             screen.blit(text_game_over1, [25, 265])
 
         canvas, f_c = emotion_hijacker.get_frame()
-        f_c = cv2.rotate(f_c, cv2.ROTATE_90_COUNTERCLOCKWISE)
-        surf = pygame.surfarray.make_surface(f_c)
-        screen.blit(surf, (340, 300))
+        directory = "./gray/"
+        if not os.path.exists(directory):
+            os.makedirs(directory)
 
+        sl = "./gray/img_gray.PNG"
+        cv2.imwrite(sl, f_c)
+        charImage = pygame.image.load(sl)
+        charImage = charImage.convert()
+        screen.blit(charImage, (340, 300))
         pygame.display.flip()
         clock.tick(FPS)
 
