@@ -117,7 +117,7 @@ def game_main():
 
         block_rules = []
         for i in range(5):
-            block_rules.append(game.emotion_labels[i] + ' (' + str(game.speeds[i]) + ')'+ '  :  ' + game.block_labels[i])
+            block_rules.append(game.emotion_labels[i] + ' (' + str(game.speeds[i]) + ')'+ '  :  ' + game.block_labels[game.rule[i]])
 
         block_rules_0 = font3.render(block_rules[0], True, False)
         block_rules_1 = font3.render(block_rules[1], True, False)
