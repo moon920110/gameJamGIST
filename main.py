@@ -13,23 +13,16 @@ def game_main():
     emotion_hijacker.ready()
 
     # Define some colors
-    BLACK = (0, 0, 0)
-    WHITE = (255, 255, 255)
-    GRAY = (128, 128, 128)
-    RED = (255, 0, 0)
-
-    size = (700, 700)
     next_block_draw = int(Tetris.zoom * 17), Tetris.zoom * 4
     next_block_size = Tetris.zoom * 5
 
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode(SIZE)
 
     pygame.display.set_caption("Tetris")
 
     # Loop until the user clicks the close button.
     done = False
     clock = pygame.time.Clock()
-    fps = 25
     game = Tetris(20, 10)
     counter = 0
 
@@ -42,9 +35,8 @@ def game_main():
         if counter > 100000:
             counter = 0
 
-        if counter % (fps // game.level // 2) == 0 or pressing_down:
-            game.set_emotion(emotion_hijacker.hijack())
-
+        game.set_emotion(emotion_hijacker.hijack())
+        if counter % (FPS // game.level // 2) == 0 or pressing_down:
             if game.state == "start":
                 game.go_down()
 
@@ -147,7 +139,7 @@ def game_main():
         screen.blit(surf, (340, 300))
 
         pygame.display.flip()
-        clock.tick(fps)
+        clock.tick(FPS)
 
     pygame.quit()
 
