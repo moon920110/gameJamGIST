@@ -6,6 +6,8 @@ Play Tetris **Emotionally**! Use your facial expressions to play Tetris.
 
 Every single play, your facial expressions will be *randomly* matched with **block types**. Besides, you have to control your facial expressions to manage the **block speed**!
 
+Here is Our [Demo Video](https://youtu.be/SkZYGZktFyM) :) 
+
 | Emotion   | Speed |
 |-----------|-------|
 | Happy     | 1     |
