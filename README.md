@@ -14,8 +14,7 @@ Every single play, your facial emotion will be *randomly* matched with **block t
 | Neutral   | 5     |
 
 ## Quick start
-- Windows `pip install -r requirements.txt`
-- Mac OS `pip install -r requirements_formac.txt`
+- `pip install -r requirements.txt`
 
 ## How to play
 1. Run `main.py`
