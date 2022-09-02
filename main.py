@@ -1,7 +1,5 @@
 import pygame
 import cv2
-from tkinter import *
-from tkinter import messagebox
 
 from emotion_recognition.emotion_hijacker import emotionHijacker
 from core.tetris import Tetris
