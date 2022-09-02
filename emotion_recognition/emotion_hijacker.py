@@ -25,7 +25,6 @@ class emotionHijacker:
         self.frame_clone = None
 
     def ready(self):
-        cv2.namedWindow('your_face')
         self.camera = cv2.VideoCapture(0)
         self.t = threading.Thread(target=self._hijack)
         self.t.start()
