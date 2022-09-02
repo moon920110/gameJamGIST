@@ -1,8 +1,8 @@
-opencv_python==4.2.0.32
+opencv_python==4.2.0.32;platform_system == "Windows"
+opencv_python-headless==4.1.2.30;platform_system != "Windows"
 Keras==2.4.0
-pandas==0.25.3
+tensorflow==2.2.0
+protobuf==3.20.0
 numpy
 imutils==0.5.3
-scikit_learn==0.22.1
 pygame
-tensorflow==2.2.0
