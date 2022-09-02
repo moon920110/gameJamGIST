@@ -14,9 +14,9 @@ Every single play, your facial expressions will be *randomly* matched with **blo
 | Neutral   | 5     |
 
 ## Quick start
+
 Python <= 3.7
-- Windows `pip install -r requirements.txt`
-- MacOS `pip install -r requirements_formac.txt`
+- `pip install -r requirements.txt`
 
 ## How to play
 1. Run `main.py`
