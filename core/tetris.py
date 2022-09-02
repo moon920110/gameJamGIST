@@ -1,5 +1,6 @@
 import copy
 import random
+from collections import deque
 from core.figure import Figure
 
 
@@ -30,17 +31,21 @@ class Tetris:
         self.emotion = 0  # init by neutral
         self.emotion_labels = ['NEUTRAL', 'HAPPY', 'ANGRY', 'SURPRISING', 'OTHERS']
         self.block_labels = ['l', 'L', 'T', 'Z', 'O']
+        self.emotion_history = deque([], maxlen=10)
         self.rule = [i for i in range(5)]  # 0-vertical, 1-L, 2-T, 3-z, 4-square
-        self.speeds = [10, 2, 6, 4, 8]
+        self.speeds = [5, 1, 3, 2, 4]
         random.shuffle(self.rule)
 
-    def new_figure(self):
-        if self.figure == None:
-            self.figure = Figure(3, 0, self.emotion, self.rule)
+    def new_figure(self, soft_reset=False):
+        if soft_reset:
             self.next_figure = Figure(3, 0, self.emotion, self.rule)
         else:
-            self.figure = copy.deepcopy(self.next_figure)
-            self.next_figure = Figure(3, 0, self.emotion, self.rule)
+            if self.figure == None:
+                self.figure = Figure(3, 0, self.emotion, self.rule)
+                self.next_figure = Figure(3, 0, self.emotion, self.rule)
+            else:
+                self.figure = copy.deepcopy(self.next_figure)
+                self.next_figure = Figure(3, 0, self.emotion, self.rule)
 
     def intersects(self):
         intersection = False
@@ -103,15 +108,21 @@ class Tetris:
             self.figure.rotation = old_rotation
 
     def set_emotion(self, emotion):
-        self.emotion = emotion
-        if self.emotion == 0:
-            self.level = 10
-        elif self.emotion == 1:
-            self.level = 2
-        elif self.emotion == 2:
-            self.level = 6
-        elif self.emotion == 3:
-            self.level = 4
-        else:
-            self.level = 8
+        def most_frequent(List):
+            counter = 0
+            num = List[0]
 
+            for i in List:
+                curr_frequency = List.count(i)
+                if (curr_frequency > counter):
+                    counter = curr_frequency
+                    num = i
+
+            return num
+
+        self.emotion_history.append(emotion)
+        freq_emo = most_frequent(self.emotion_history)
+        if self.emotion != freq_emo:
+            self.emotion = freq_emo
+            self.new_figure(True)
+            self.level = self.speeds[self.emotion]
