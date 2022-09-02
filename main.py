@@ -27,7 +27,6 @@ def game_main():
     counter = 0
 
     pressing_down = False
-    loading = 0
 
     while not done:
         if game.figure is None:
@@ -53,18 +52,11 @@ def game_main():
                 if event.key == pygame.K_SPACE:
                     game.go_space()
                 if event.key == pygame.K_ESCAPE:
-                    loading = True
                     game.__init__(20, 10)
 
         if event.type == pygame.KEYUP:
                 if event.key == pygame.K_DOWN:
                     pressing_down = False
-
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_p:
-                loading = 2
-        if loading == 1:
-            continue
 
         game.set_emotion(emotion_hijacker.hijack())
         if counter % (FPS // game.level // 2) == 0 or pressing_down:
@@ -149,8 +141,6 @@ def game_main():
 
         pygame.display.flip()
         clock.tick(FPS)
-
-        loading += 1
 
     pygame.quit()
 
