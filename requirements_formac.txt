@@ -1,8 +1,0 @@
-opencv_python-headless==4.1.2.30
-Keras==2.4.0
-pandas==0.25.3
-numpy
-imutils==0.5.3
-scikit_learn==0.22.1
-pygame
-tensorflow==2.2.0
