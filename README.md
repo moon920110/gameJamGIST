@@ -1,7 +1,8 @@
 # Emo-tris 😀😳😠🤔😐
 Play Tetris **Emotionally**! Use your facial expressions to play Tetris. 
 
-![screenshot](screenshot.png)
+![image](https://user-images.githubusercontent.com/45346964/188149775-a80952e9-5451-4f4e-bb30-cb83527bd891.png)
+
 
 Every single play, your facial expressions will be *randomly* matched with **block types**. Besides, you have to control your facial expressions to manage the **block speed**!
 
@@ -25,6 +26,16 @@ Python <= 3.7
    2. Don't worry! The emotion&speed relation is always the same. Just the block types are changing each round!
 3. Be emotional to manage next block type and speed.
 4. Cheer up!
+
+## Key Description
+
+- Arrow Up : Rotate the Block 
+- Arrow Down : Go Fast 
+- Arrow Right : Move to Right
+- Arrow Left : Move to Left
+- Space Bar : Hard Drop
+- ESC : Reset the Game
+
 
 ### Tips for Newbies
 - Be **emotional(!)** because a *neutral* face will drop your blocks really quickly.
