@@ -2,6 +2,7 @@ import copy
 import random
 from collections import deque
 from core.figure import Figure
+from common.const import *
 
 
 class Tetris:
@@ -11,9 +12,9 @@ class Tetris:
     field = []
     height = 0
     width = 0
-    x = 30
-    y = 50
-    zoom = 25
+    x = int(SIZE[0] * 0.25)  # location of tetris window
+    y = int(SIZE[1] * 0.1)  # location of tetris window
+    zoom = int(SIZE[0] * 0.015)  # size of tetris square
     figure = None
 
     def __init__(self, height, width):
