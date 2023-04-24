@@ -5,6 +5,7 @@ import time
 from keras.models import load_model
 import numpy as np
 import threading
+from common.const import *
 
 
 class emotionHijacker:
@@ -41,7 +42,7 @@ class emotionHijacker:
             # starting video streaming
             frame = self.camera.read()[1]
             # reading the frame
-            frame = imutils.resize(frame, height=168)
+            frame = imutils.resize(frame, height=int(SIZE[1] * 0.6))  # size of video
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             faces = self.face_detection.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30),
                                                     flags=cv2.CASCADE_SCALE_IMAGE)
